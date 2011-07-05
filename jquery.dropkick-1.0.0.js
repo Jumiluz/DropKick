@@ -6,18 +6,21 @@
  *
  * © 2011 Jamie Lottering <http://github.com/JamieLottering>
  *                        <http://twitter.com/JamieLottering>
- * 
+ *
+ *
+ * Fork to support images on dropdown options
+ *
+ *
  */
 (function ($, window, document) {
 
   var ie6 = false;
 
   // Help prevent flashes of unstyled content
-  if ($.browser.msie && $.browser.version.substr(0, 1) < 7) {
+  if ($.browser.msie && $.browser.version.substr(0, 1) < 7)
     ie6 = true;
-  } else {
+  else
     document.documentElement.className = document.documentElement.className + ' dk_fouc';
-  }
   
   var
     // Public methods exposed to $.fn.dropkick()
@@ -49,7 +52,7 @@
     ].join(''),
 
     // HTML template for dropdown options
-    optionTemplate = '<li class="{{ current }}"><a data-dk-dropdown-value="{{ value }}">{{ text }}</a></li>',
+    optionTemplate = '<li class="{{ current }}"><a data-dk-dropdown-value="{{ value }}"><img src="{{ rel }}" style="float:left; margin-right:10px;"/>{{ text }}</a></li>',
 
     // Some nice default values
     defaults = {
@@ -325,6 +328,7 @@
         oTemplate = oTemplate.replace('{{ value }}', $option.val());
         oTemplate = oTemplate.replace('{{ current }}', (_notBlank($option.val()) === view.value) ? current : '');
         oTemplate = oTemplate.replace('{{ text }}', $option.text());
+        oTemplate = oTemplate.replace('{{ rel }}', (_notBlank($option.attr('rel'))) ? $option.attr('rel') : '');
 
         options[options.length] = oTemplate;
       }
